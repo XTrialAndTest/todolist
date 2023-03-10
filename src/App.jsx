@@ -60,7 +60,7 @@ let TodoList = () => {
         </div>
         {finish.map(({ id, todo, time }) => {
           return (
-            <div className='todo-list'>
+            <div key={id} className='todo-list'>
               <h4 className='h4-todo'>
                 {id}. {todo}
               </h4>
