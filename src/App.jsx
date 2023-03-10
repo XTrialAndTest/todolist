@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import './todolist.scss';
 let TodoList = () => {
   let [todo, setTodo] = useState('');
@@ -16,6 +17,7 @@ let TodoList = () => {
     setTime('');
     setTodo('');
   };
+  let remove = (theid) => setFinish((xx) => xx.filter((x) => x.id !== theid));
   let changeTodo = (e) => {
     setTodo(e.target.value);
   };
@@ -63,6 +65,7 @@ let TodoList = () => {
                 {id}. {todo}
               </h4>
               <h4>{time}</h4>
+              <button onClick={() => remove(id)}>&#x2715;</button>
             </div>
           );
         })}
