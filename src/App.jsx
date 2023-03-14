@@ -1,23 +1,27 @@
 import { useState } from 'react';
 
 import './todolist.scss';
-let TodoList = () => {
+let TMTodoList = () => {
   let [todo, setTodo] = useState('');
   let [time, setTime] = useState('');
   let [finish, setFinish] = useState([]);
   let [count, setcount] = useState(1);
   console.log(time);
+
   let submit = (e) => {
     e.preventDefault();
     setcount(count + 1);
     setFinish([...finish, { id: count, todo, time }]);
-    // if (time && todo) {
 
-    // }
     setTime('');
     setTodo('');
   };
-  let remove = (theid) => setFinish((xx) => xx.filter((x) => x.id !== theid));
+  const deleted = (index) => {
+    let prev = [...finish];
+    prev.splice(index, 1);
+    setFinish(prev);
+  };
+
   let changeTodo = (e) => {
     setTodo(e.target.value);
   };
@@ -58,14 +62,14 @@ let TodoList = () => {
           <h2 className='td'>To do list</h2>
           <h2>Time</h2>
         </div>
-        {finish.map(({ id, todo, time }) => {
+        {finish.map(({ todo, time }, index) => {
           return (
-            <div key={id} className='todo-list'>
+            <div key={index} className='todo-list'>
               <h4 className='h4-todo'>
-                {id}. {todo}
+                {index + 1}. {todo}
               </h4>
               <h4>{time}</h4>
-              <button onClick={() => remove(id)}>&#x2715;</button>
+              <button onClick={deleted}>&#x2715;</button>
             </div>
           );
         })}
@@ -73,4 +77,4 @@ let TodoList = () => {
     </>
   );
 };
-export default TodoList;
+export default TMTodoList;
