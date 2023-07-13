@@ -36,61 +36,62 @@ let TMTodoList = () => {
     setTime(e.target.value);
   };
 
-  return;
-  <>
-    <div className='container'>
-      <h1>Mush's todo List</h1>
-      <form action='' onSubmit={submit} className='form'>
-        <div className='time'>
-          <label htmlFor='time'>what to do</label>
-          <input
-            type='text'
-            name='todo'
-            id='task'
-            value={todo}
-            required
-            onChange={changeTodo}
-          />
+  return (
+    <>
+      <div className='container'>
+        <h1>Mush's todo List</h1>
+        <form action='' onSubmit={submit} className='form'>
+          <div className='time'>
+            <label htmlFor='time'>what to do</label>
+            <input
+              type='text'
+              name='todo'
+              id='task'
+              value={todo}
+              required
+              onChange={changeTodo}
+            />
+          </div>
+          <div className='time'>
+            <label htmlFor='time'>what time</label>
+            <input
+              type='time'
+              name='time'
+              id='time'
+              value={time}
+              required
+              onChange={changeTime}
+            />
+          </div>
+          <button type='submit'> sumbit</button>
+        </form>
+        <div className='todolist'>
+          <h2 className='td'>To do list</h2>
+          <h2>Time</h2>
         </div>
-        <div className='time'>
-          <label htmlFor='time'>what time</label>
-          <input
-            type='time'
-            name='time'
-            id='time'
-            value={time}
-            required
-            onChange={changeTime}
-          />
-        </div>
-        <button type='submit'> sumbit</button>
-      </form>
-      <div className='todolist'>
-        <h2 className='td'>To do list</h2>
-        <h2>Time</h2>
+
+        {newFinish.map(({ id, todo, time }) => {
+          console.log(finish, newFinish);
+          <div>
+            {finish.map(({ todo, time }, index) => {
+              return (
+                <div key={index} className='todo-list'>
+                  <h4 className='h4-todo'>
+                    {index + 1}. {todo}
+                  </h4>
+                  <h4>{time}</h4>
+
+                  <button onClick={() => remove(id)}>&#x2715;</button>
+                  <button onClick={() => add(id)}>&#x2715;</button>
+
+                  <button onClick={deleted}>&#x2715;</button>
+                </div>
+              );
+            })}
+          </div>;
+        })}
       </div>
-
-      {newFinish.map(({ id, todo, time }) => {
-        console.log(finish, newFinish);
-        <div>
-          {finish.map(({ todo, time }, index) => {
-            return (
-              <div key={index} className='todo-list'>
-                <h4 className='h4-todo'>
-                  {index + 1}. {todo}
-                </h4>
-                <h4>{time}</h4>
-
-                <button onClick={() => remove(id)}>&#x2715;</button>
-                <button onClick={() => add(id)}>&#x2715;</button>
-
-                <button onClick={deleted}>&#x2715;</button>
-              </div>
-            );
-          })}
-        </div>;
-      })}
-    </div>
-  </>;
+    </>
+  );
 };
 export default TMTodoList;
