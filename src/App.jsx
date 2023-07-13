@@ -6,6 +6,9 @@ let TodoList = () => {
   let [time, setTime] = useState('');
   let [finish, setFinish] = useState([]);
   let [count, setcount] = useState(1);
+  let newFinish = finish;
+  console.log('top,', finish);
+
   console.log(time);
   let submit = (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ let TodoList = () => {
     setTodo('');
   };
   let remove = (theid) => setFinish((xx) => xx.filter((x) => x.id !== theid));
+  let add = (theid) => setFinish((xx) => xx.filter((x) => x.id === theid));
   let changeTodo = (e) => {
     setTodo(e.target.value);
   };
@@ -58,7 +62,8 @@ let TodoList = () => {
           <h2 className='td'>To do list</h2>
           <h2>Time</h2>
         </div>
-        {finish.map(({ id, todo, time }) => {
+        {newFinish.map(({ id, todo, time }) => {
+          console.log(finish, newFinish);
           return (
             <div key={id} className='todo-list'>
               <h4 className='h4-todo'>
@@ -66,6 +71,7 @@ let TodoList = () => {
               </h4>
               <h4>{time}</h4>
               <button onClick={() => remove(id)}>&#x2715;</button>
+              <button onClick={() => add(id)}>&#x2715;</button>
             </div>
           );
         })}
